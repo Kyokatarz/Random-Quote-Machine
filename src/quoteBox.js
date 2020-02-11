@@ -1,4 +1,5 @@
 'use strict'
+
 const randomQuotes = [
     {
         quote: 'Rule your mind or it will rule you.',
@@ -103,8 +104,26 @@ class QuoteBox extends React.Component{
 }
 
 let quoteBoxStyle = {
-   fontSize: '1px'
+    height: '18.75rem',
+    width: '38.5rem',
+    fontSize: "1.5rem",
+    border: '3px solid blue',
+    borderRadius: 10,
+    padding: '2.5%',
+    display: 'flex',
+    flexDirection:'column',
+    justifyContent: 'center',
+    alignItem:'center',
+    position: 'absolute',
+    backgroundColor: 'white',
+    opacity: '75%'
 };
+
+let textBoxStyle = {
+    
+    display: 'flex',
+    alignItem: 'flex-start'
+}
 
 let domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(<QuoteBox/>, domContainer);

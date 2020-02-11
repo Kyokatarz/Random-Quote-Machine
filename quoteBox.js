@@ -8,6 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+import './font.css';
 var randomQuotes = [{
     quote: 'Rule your mind or it will rule you.',
     author: 'Horace'
@@ -121,7 +122,25 @@ var QuoteBox = function (_React$Component) {
 }(React.Component);
 
 var quoteBoxStyle = {
-    fontSize: 50
+    height: '18.75rem',
+    width: '38.5rem',
+    fontSize: "1.5rem",
+    border: '3px solid blue',
+    borderRadius: 10,
+    padding: '2.5%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItem: 'center',
+    position: 'absolute',
+    backgroundColor: 'white',
+    opacity: '75%'
+};
+
+var textBoxStyle = {
+
+    display: 'flex',
+    alignItem: 'flex-start'
 };
 
 var domContainer = document.querySelector('#quoteBoxContainer');
