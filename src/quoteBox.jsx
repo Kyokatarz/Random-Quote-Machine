@@ -79,12 +79,15 @@ class QuoteBox extends React.Component{
     };
     
     
-    componentWillMount(){
+    componentDidMount(){
         this.GetNewQuote();
+        
     };
     
     render(){
-        
+        if (!this.props.width == null){
+            return null;
+        }
         return(
            <div style={quoteBoxStyle} id="quote-box">
                 <div id="text-box">
@@ -99,6 +102,20 @@ class QuoteBox extends React.Component{
                     <button id="new-quote" onClick = {this.GetNewQuote}>New Quote</button>
                 </div>
             </div> 
+        );
+    }
+}
+
+class TestSubject extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    
+    render(){
+        return(
+        <div>
+            <h1> THIS WORKS</h1>    
+        </div>
         );
     }
 }
@@ -121,9 +138,15 @@ let quoteBoxStyle = {
 
 let textBoxStyle = {
     
-    display: 'flex',
-    alignItem: 'flex-start'
-}
-
+};
 let domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(<QuoteBox/>, domContainer);
+
+
+
+
+
+
+
+
+

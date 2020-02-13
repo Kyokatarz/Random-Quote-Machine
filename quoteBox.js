@@ -8,7 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import './font.css';
 var randomQuotes = [{
     quote: 'Rule your mind or it will rule you.',
     author: 'Horace'
@@ -72,14 +71,16 @@ var QuoteBox = function (_React$Component) {
             });
         }
     }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
             this.GetNewQuote();
         }
     }, {
         key: 'render',
         value: function render() {
-
+            if (!this.props.width == null) {
+                return null;
+            }
             return React.createElement(
                 'div',
                 { style: quoteBoxStyle, id: 'quote-box' },
@@ -121,6 +122,33 @@ var QuoteBox = function (_React$Component) {
     return QuoteBox;
 }(React.Component);
 
+var TestSubject = function (_React$Component2) {
+    _inherits(TestSubject, _React$Component2);
+
+    function TestSubject(props) {
+        _classCallCheck(this, TestSubject);
+
+        return _possibleConstructorReturn(this, (TestSubject.__proto__ || Object.getPrototypeOf(TestSubject)).call(this, props));
+    }
+
+    _createClass(TestSubject, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    ' THIS WORKS'
+                )
+            );
+        }
+    }]);
+
+    return TestSubject;
+}(React.Component);
+
 var quoteBoxStyle = {
     height: '18.75rem',
     width: '38.5rem',
@@ -137,11 +165,6 @@ var quoteBoxStyle = {
     opacity: '75%'
 };
 
-var textBoxStyle = {
-
-    display: 'flex',
-    alignItem: 'flex-start'
-};
-
+var textBoxStyle = {};
 var domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(React.createElement(QuoteBox, null), domContainer);
