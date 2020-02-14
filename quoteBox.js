@@ -85,6 +85,7 @@ var QuoteBox = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var twitterURL = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=".concat(this.state.quote, " -", this.state.author);
 
             return React.createElement(
                 'div',
@@ -115,14 +116,14 @@ var QuoteBox = function (_React$Component) {
                     'div',
                     { id: 'button-box', style: buttonBoxStyle },
                     React.createElement(
+                        'a',
+                        { href: twitterURL, id: 'tweet-quote' },
+                        React.createElement('i', { 'class': 'fab fa-twitter-square fa-3x' })
+                    ),
+                    React.createElement(
                         'button',
                         { id: 'new-quote', style: newQuoteBtnStyle, onClick: this.GetNewQuote },
-                        React.createElement(
-                            'span',
-                            null,
-                            React.createElement('i', { className: 'fas fa-sync-alt' })
-                        ),
-                        ' New Quote'
+                        'New Quote'
                     )
                 )
             );
@@ -163,7 +164,7 @@ var TestSubject = function (_React$Component2) {
 var quoteBoxStyle = {
     height: '18.75rem',
     width: '38.5rem',
-    border: '3px solid blue',
+    border: '1.5px solid #0373fc',
     borderRadius: 10,
     padding: '2.5%',
     display: 'flex',
@@ -172,7 +173,8 @@ var quoteBoxStyle = {
     alignItem: 'center',
     position: 'absolute',
     backgroundColor: 'white',
-    opacity: '75%'
+    opacity: '85%',
+    boxShadow: '2px 7px 7px black'
 };
 
 var textBoxStyle = {
@@ -196,16 +198,20 @@ var authorBoxStyle = {
 
 var buttonBoxStyle = {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
+    //border: '1px solid red'
 };
 
 var newQuoteBtnStyle = {
+    marginLeft: 'auto',
+    paddingRight: '0px',
     textAlign: 'center',
     fontSize: '1.7rem',
-    width: '100%',
+    width: '70%',
     height: '3rem',
     fontFamily: 'Dancing Script, cursive',
     fontWeight: 'bold'
+
 };
 
 var domContainer = document.querySelector('#quoteBoxContainer');

@@ -91,8 +91,10 @@ class QuoteBox extends React.Component{
         this.GetNewQuote();
         
     };
-    
+   
+
     render(){
+         let twitterURL = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=".concat(this.state.quote," -",this.state.author);
         
         return(
            <div style={quoteBoxStyle} id="quote-box">
@@ -106,7 +108,9 @@ class QuoteBox extends React.Component{
                 </div>
                 
                 <div id='button-box' style={buttonBoxStyle}>
-                    <button id="new-quote" style={newQuoteBtnStyle} onClick = {this.GetNewQuote}><span><i className="fas fa-sync-alt"></i></span> New Quote</button>
+                    <a href = {twitterURL} id='tweet-quote'><i class="fab fa-twitter-square fa-3x"></i></a>
+                    
+                    <button id="new-quote" style={newQuoteBtnStyle} onClick = {this.GetNewQuote}>New Quote</button>
                 </div>
             </div> 
         );
@@ -131,7 +135,7 @@ class TestSubject extends React.Component{
 let quoteBoxStyle = {
     height: '18.75rem',
     width: '38.5rem',
-    border: '3px solid blue',
+    border: '1.5px solid #0373fc',
     borderRadius: 10,
     padding: '2.5%',
     display: 'flex',
@@ -140,7 +144,8 @@ let quoteBoxStyle = {
     alignItem:'center',
     position: 'absolute',
     backgroundColor: 'white',
-    opacity: '75%'
+    opacity: '85%',
+    boxShadow: '2px 7px 7px black'
 };
 
 let textBoxStyle = {
@@ -164,16 +169,21 @@ let authorBoxStyle = {
 
 let buttonBoxStyle = {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    //border: '1px solid red'
 }; 
 
 let newQuoteBtnStyle = {
+    marginLeft: 'auto',
+    paddingRight: '0px',
     textAlign: 'center',
     fontSize: '1.7rem',
-    width: '100%',
+    width: '70%',
     height: '3rem',
     fontFamily: 'Dancing Script, cursive',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    
+    
 }
 
 
