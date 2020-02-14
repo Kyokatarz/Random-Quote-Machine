@@ -1,5 +1,6 @@
 'use strict'
 
+
 const randomQuotes = [
     {
         quote: 'Rule your mind or it will rule you.',
@@ -62,7 +63,8 @@ class QuoteBox extends React.Component{
         super(props);
         this.state = {
             quote: 'Quote Goes Here',
-            author: 'Author Goes Here'
+            author: 'Author Goes Here',
+            number: null
         };
         
     this.GetNewQuote = this.GetNewQuote.bind(this);
@@ -71,9 +73,15 @@ class QuoteBox extends React.Component{
     GetNewQuote(){
         let randomNumber = Math.floor(Math.random() * randomQuotes.length);
         
-        this.setState({
+        if (randomNumber == this.state.number){
+            this.GetNewQuote();
+        } //prevent same quote twice
+        
+        else this.setState({
+            number: randomNumber,
             quote: randomQuotes[randomNumber]['quote'],
             author: randomQuotes[randomNumber]['author']
+            
         });
     
     };
@@ -85,21 +93,20 @@ class QuoteBox extends React.Component{
     };
     
     render(){
-        if (!this.props.width == null){
-            return null;
-        }
+        
         return(
            <div style={quoteBoxStyle} id="quote-box">
-                <div id="text-box">
+                
+                <div id="text-box" style={textBoxStyle}>
                     <p id='text'>"{this.state.quote}"</p>
                 </div>
                 
-                <div id="author-box">
+                <div id="author-box" style={authorBoxStyle}>
                     <p id='author'>-{this.state.author}.</p>
                 </div>
                 
-                <div id='button-box'>
-                    <button id="new-quote" onClick = {this.GetNewQuote}>New Quote</button>
+                <div id='button-box' style={buttonBoxStyle}>
+                    <button id="new-quote" style={newQuoteBtnStyle} onClick = {this.GetNewQuote}><span><i className="fas fa-sync-alt"></i></span> New Quote</button>
                 </div>
             </div> 
         );
@@ -112,6 +119,7 @@ class TestSubject extends React.Component{
     }
     
     render(){
+        
         return(
         <div>
             <h1> THIS WORKS</h1>    
@@ -123,7 +131,6 @@ class TestSubject extends React.Component{
 let quoteBoxStyle = {
     height: '18.75rem',
     width: '38.5rem',
-    fontSize: "1.5rem",
     border: '3px solid blue',
     borderRadius: 10,
     padding: '2.5%',
@@ -137,8 +144,39 @@ let quoteBoxStyle = {
 };
 
 let textBoxStyle = {
+    //border: '2px solid red',
+    height: '50%',
+    paddingLeft: '0.625rem',
+    fontSize: "1.5rem",
+    fontFamily: 'Cairo, sans-serif',
+    textAlign: 'center'
+};
+
+let authorBoxStyle = {
+    fontSize: '1.8rem',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    //border: '2px solid blue',
+    paddingRight: '1.5rem',
+    fontFamily: 'Zhi Mang Xing',
     
 };
+
+let buttonBoxStyle = {
+    display: 'flex',
+    justifyContent: 'center'
+}; 
+
+let newQuoteBtnStyle = {
+    textAlign: 'center',
+    fontSize: '1.7rem',
+    width: '100%',
+    height: '3rem',
+    fontFamily: 'Dancing Script, cursive',
+    fontWeight: 'bold'
+}
+
+
 let domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(<QuoteBox/>, domContainer);
 

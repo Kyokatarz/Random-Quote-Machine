@@ -53,7 +53,8 @@ var QuoteBox = function (_React$Component) {
 
         _this.state = {
             quote: 'Quote Goes Here',
-            author: 'Author Goes Here'
+            author: 'Author Goes Here',
+            number: null
         };
 
         _this.GetNewQuote = _this.GetNewQuote.bind(_this);
@@ -65,10 +66,16 @@ var QuoteBox = function (_React$Component) {
         value: function GetNewQuote() {
             var randomNumber = Math.floor(Math.random() * randomQuotes.length);
 
-            this.setState({
-                quote: randomQuotes[randomNumber]['quote'],
-                author: randomQuotes[randomNumber]['author']
-            });
+            if (randomNumber == this.state.number) {
+                this.GetNewQuote();
+            } //prevent same quote twice
+
+            else this.setState({
+                    number: randomNumber,
+                    quote: randomQuotes[randomNumber]['quote'],
+                    author: randomQuotes[randomNumber]['author']
+
+                });
         }
     }, {
         key: 'componentDidMount',
@@ -78,15 +85,13 @@ var QuoteBox = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            if (!this.props.width == null) {
-                return null;
-            }
+
             return React.createElement(
                 'div',
                 { style: quoteBoxStyle, id: 'quote-box' },
                 React.createElement(
                     'div',
-                    { id: 'text-box' },
+                    { id: 'text-box', style: textBoxStyle },
                     React.createElement(
                         'p',
                         { id: 'text' },
@@ -97,7 +102,7 @@ var QuoteBox = function (_React$Component) {
                 ),
                 React.createElement(
                     'div',
-                    { id: 'author-box' },
+                    { id: 'author-box', style: authorBoxStyle },
                     React.createElement(
                         'p',
                         { id: 'author' },
@@ -108,11 +113,16 @@ var QuoteBox = function (_React$Component) {
                 ),
                 React.createElement(
                     'div',
-                    { id: 'button-box' },
+                    { id: 'button-box', style: buttonBoxStyle },
                     React.createElement(
                         'button',
-                        { id: 'new-quote', onClick: this.GetNewQuote },
-                        'New Quote'
+                        { id: 'new-quote', style: newQuoteBtnStyle, onClick: this.GetNewQuote },
+                        React.createElement(
+                            'span',
+                            null,
+                            React.createElement('i', { className: 'fas fa-sync-alt' })
+                        ),
+                        ' New Quote'
                     )
                 )
             );
@@ -134,6 +144,7 @@ var TestSubject = function (_React$Component2) {
     _createClass(TestSubject, [{
         key: 'render',
         value: function render() {
+
             return React.createElement(
                 'div',
                 null,
@@ -152,7 +163,6 @@ var TestSubject = function (_React$Component2) {
 var quoteBoxStyle = {
     height: '18.75rem',
     width: '38.5rem',
-    fontSize: "1.5rem",
     border: '3px solid blue',
     borderRadius: 10,
     padding: '2.5%',
@@ -165,6 +175,38 @@ var quoteBoxStyle = {
     opacity: '75%'
 };
 
-var textBoxStyle = {};
+var textBoxStyle = {
+    //border: '2px solid red',
+    height: '50%',
+    paddingLeft: '0.625rem',
+    fontSize: "1.5rem",
+    fontFamily: 'Cairo, sans-serif',
+    textAlign: 'center'
+};
+
+var authorBoxStyle = {
+    fontSize: '1.8rem',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    //border: '2px solid blue',
+    paddingRight: '1.5rem',
+    fontFamily: 'Zhi Mang Xing'
+
+};
+
+var buttonBoxStyle = {
+    display: 'flex',
+    justifyContent: 'center'
+};
+
+var newQuoteBtnStyle = {
+    textAlign: 'center',
+    fontSize: '1.7rem',
+    width: '100%',
+    height: '3rem',
+    fontFamily: 'Dancing Script, cursive',
+    fontWeight: 'bold'
+};
+
 var domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(React.createElement(QuoteBox, null), domContainer);
