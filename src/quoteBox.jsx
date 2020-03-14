@@ -1,6 +1,3 @@
-'use strict'
-
-
 const randomQuotes = [
     {
         quote: 'Rule your mind or it will rule you.',
@@ -56,7 +53,10 @@ const randomQuotes = [
         quote: 'Surround yourself only with people who are going to take you higher.',
         author: 'Oprah Winfrey'
     }
-];
+]
+const randomColor = ['#34E5FF', '#ADBDFF', '#B74F6F',
+                     '#2A2D34','#F26430','#02182B',
+                    '#C49991','#6461A0', '#92374D', '#231651']
 
 class QuoteBox extends React.Component{
     constructor(props){
@@ -64,15 +64,16 @@ class QuoteBox extends React.Component{
         this.state = {
             quote: 'Quote Goes Here',
             author: 'Author Goes Here',
-            number: null
-        };
+            number: null,
+            color: null
+        }
         
-    this.GetNewQuote = this.GetNewQuote.bind(this);
-    };
+    this.GetNewQuote = this.GetNewQuote.bind(this)
+    }
     
     GetNewQuote(){
-        let randomNumber = Math.floor(Math.random() * randomQuotes.length);
-        
+        let randomNumber = Math.floor(Math.random() * randomQuotes.length)
+            
         if (randomNumber == this.state.number){
             this.GetNewQuote();
         } //prevent same quote twice
@@ -80,121 +81,47 @@ class QuoteBox extends React.Component{
         else this.setState({
             number: randomNumber,
             quote: randomQuotes[randomNumber]['quote'],
-            author: randomQuotes[randomNumber]['author']
-            
+            author: randomQuotes[randomNumber]['author'],
+            color: randomColor[randomNumber]
         });
-    
+        
+        let container = document.getElementById('container')
+        container.style.transition = 'all 1s linear';
+        container.style.backgroundColor = this.state.color
     };
     
+    handleClick(){
+        this.GetNewQuote()
+        
+    }
     
     componentDidMount(){
-        this.GetNewQuote();
+        this.GetNewQuote()
         
-    };
+    }
    
 
     render(){
          let twitterURL = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=".concat(this.state.quote," -",this.state.author);
         
         return(
-           <div style={quoteBoxStyle} id="quote-box">
-                
-                <div id="text-box" style={textBoxStyle}>
+            <div id='container'>
+                <div id="quote-box">
+                <div id="text-box">
                     <p id='text'>"{this.state.quote}"</p>
                 </div>
-                
-                <div id="author-box" style={authorBoxStyle}>
+                <div id="author-box">
                     <p id='author'>-{this.state.author}.</p>
                 </div>
-                
-                <div id='button-box' style={buttonBoxStyle}>
-                    <a href = {twitterURL} id='tweet-quote'><i class="fab fa-twitter-square fa-3x"></i></a>
-                    
-                    <button id="new-quote" style={newQuoteBtnStyle} onClick = {this.GetNewQuote}>New Quote</button>
+                <div id='button-box'>
+                    <a href = {twitterURL} id='tweet-quote' target='_blank'><i class="fab fa-twitter-square fa-3x"></i></a>
+                    <button id="new-quote" onClick = {this.handleClick.bind(this)}>New Quote</button>
                 </div>
-            </div> 
-        );
+                </div>
+            </div>
+        )
     }
 }
-
-class TestSubject extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    
-    render(){
-        
-        return(
-        <div>
-            <h1> THIS WORKS</h1>    
-        </div>
-        );
-    }
-}
-
-let quoteBoxStyle = {
-    height: '18.75rem',
-    width: '38.5rem',
-    border: '1.5px solid #0373fc',
-    borderRadius: 10,
-    padding: '2.5%',
-    display: 'flex',
-    flexDirection:'column',
-    justifyContent: 'center',
-    alignItem:'center',
-    position: 'absolute',
-    backgroundColor: 'white',
-    opacity: '85%',
-    boxShadow: '2px 7px 7px black'
-};
-
-let textBoxStyle = {
-    //border: '2px solid red',
-    height: '50%',
-    paddingLeft: '0.625rem',
-    fontSize: "1.5rem",
-    fontFamily: 'Cairo, sans-serif',
-    textAlign: 'center'
-};
-
-let authorBoxStyle = {
-    fontSize: '1.8rem',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    //border: '2px solid blue',
-    paddingRight: '1.5rem',
-    fontFamily: 'Zhi Mang Xing',
-    
-};
-
-let buttonBoxStyle = {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    //border: '1px solid red'
-}; 
-
-let newQuoteBtnStyle = {
-    marginLeft: 'auto',
-    paddingRight: '0px',
-    textAlign: 'center',
-    fontSize: '1.7rem',
-    width: '70%',
-    height: '3rem',
-    fontFamily: 'Dancing Script, cursive',
-    fontWeight: 'bold',
-    
-    
-}
-
 
 let domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(<QuoteBox/>, domContainer);
-
-
-
-
-
-
-
-
-

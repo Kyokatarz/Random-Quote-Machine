@@ -1,5 +1,3 @@
-'use strict';
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42,6 +40,7 @@ var randomQuotes = [{
     quote: 'Surround yourself only with people who are going to take you higher.',
     author: 'Oprah Winfrey'
 }];
+var randomColor = ['#34E5FF', '#ADBDFF', '#B74F6F', '#2A2D34', '#F26430', '#02182B', '#C49991', '#6461A0', '#92374D', '#231651'];
 
 var QuoteBox = function (_React$Component) {
     _inherits(QuoteBox, _React$Component);
@@ -54,7 +53,8 @@ var QuoteBox = function (_React$Component) {
         _this.state = {
             quote: 'Quote Goes Here',
             author: 'Author Goes Here',
-            number: null
+            number: null,
+            color: null
         };
 
         _this.GetNewQuote = _this.GetNewQuote.bind(_this);
@@ -73,9 +73,18 @@ var QuoteBox = function (_React$Component) {
             else this.setState({
                     number: randomNumber,
                     quote: randomQuotes[randomNumber]['quote'],
-                    author: randomQuotes[randomNumber]['author']
-
+                    author: randomQuotes[randomNumber]['author'],
+                    color: randomColor[randomNumber]
                 });
+
+            var container = document.getElementById('container');
+            container.style.transition = 'all 1s linear';
+            container.style.backgroundColor = this.state.color;
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            this.GetNewQuote();
         }
     }, {
         key: 'componentDidMount',
@@ -89,41 +98,45 @@ var QuoteBox = function (_React$Component) {
 
             return React.createElement(
                 'div',
-                { style: quoteBoxStyle, id: 'quote-box' },
+                { id: 'container' },
                 React.createElement(
                     'div',
-                    { id: 'text-box', style: textBoxStyle },
+                    { id: 'quote-box' },
                     React.createElement(
-                        'p',
-                        { id: 'text' },
-                        '"',
-                        this.state.quote,
-                        '"'
-                    )
-                ),
-                React.createElement(
-                    'div',
-                    { id: 'author-box', style: authorBoxStyle },
-                    React.createElement(
-                        'p',
-                        { id: 'author' },
-                        '-',
-                        this.state.author,
-                        '.'
-                    )
-                ),
-                React.createElement(
-                    'div',
-                    { id: 'button-box', style: buttonBoxStyle },
-                    React.createElement(
-                        'a',
-                        { href: twitterURL, id: 'tweet-quote' },
-                        React.createElement('i', { 'class': 'fab fa-twitter-square fa-3x' })
+                        'div',
+                        { id: 'text-box' },
+                        React.createElement(
+                            'p',
+                            { id: 'text' },
+                            '"',
+                            this.state.quote,
+                            '"'
+                        )
                     ),
                     React.createElement(
-                        'button',
-                        { id: 'new-quote', style: newQuoteBtnStyle, onClick: this.GetNewQuote },
-                        'New Quote'
+                        'div',
+                        { id: 'author-box' },
+                        React.createElement(
+                            'p',
+                            { id: 'author' },
+                            '-',
+                            this.state.author,
+                            '.'
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { id: 'button-box' },
+                        React.createElement(
+                            'a',
+                            { href: twitterURL, id: 'tweet-quote', target: '_blank' },
+                            React.createElement('i', { 'class': 'fab fa-twitter-square fa-3x' })
+                        ),
+                        React.createElement(
+                            'button',
+                            { id: 'new-quote', onClick: this.handleClick.bind(this) },
+                            'New Quote'
+                        )
                     )
                 )
             );
@@ -132,87 +145,6 @@ var QuoteBox = function (_React$Component) {
 
     return QuoteBox;
 }(React.Component);
-
-var TestSubject = function (_React$Component2) {
-    _inherits(TestSubject, _React$Component2);
-
-    function TestSubject(props) {
-        _classCallCheck(this, TestSubject);
-
-        return _possibleConstructorReturn(this, (TestSubject.__proto__ || Object.getPrototypeOf(TestSubject)).call(this, props));
-    }
-
-    _createClass(TestSubject, [{
-        key: 'render',
-        value: function render() {
-
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'h1',
-                    null,
-                    ' THIS WORKS'
-                )
-            );
-        }
-    }]);
-
-    return TestSubject;
-}(React.Component);
-
-var quoteBoxStyle = {
-    height: '18.75rem',
-    width: '38.5rem',
-    border: '1.5px solid #0373fc',
-    borderRadius: 10,
-    padding: '2.5%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItem: 'center',
-    position: 'absolute',
-    backgroundColor: 'white',
-    opacity: '85%',
-    boxShadow: '2px 7px 7px black'
-};
-
-var textBoxStyle = {
-    //border: '2px solid red',
-    height: '50%',
-    paddingLeft: '0.625rem',
-    fontSize: "1.5rem",
-    fontFamily: 'Cairo, sans-serif',
-    textAlign: 'center'
-};
-
-var authorBoxStyle = {
-    fontSize: '1.8rem',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    //border: '2px solid blue',
-    paddingRight: '1.5rem',
-    fontFamily: 'Zhi Mang Xing'
-
-};
-
-var buttonBoxStyle = {
-    display: 'flex',
-    justifyContent: 'flex-end'
-    //border: '1px solid red'
-};
-
-var newQuoteBtnStyle = {
-    marginLeft: 'auto',
-    paddingRight: '0px',
-    textAlign: 'center',
-    fontSize: '1.7rem',
-    width: '70%',
-    height: '3rem',
-    fontFamily: 'Dancing Script, cursive',
-    fontWeight: 'bold'
-
-};
 
 var domContainer = document.querySelector('#quoteBoxContainer');
 ReactDOM.render(React.createElement(QuoteBox, null), domContainer);
