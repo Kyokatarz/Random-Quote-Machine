@@ -1,26 +1,78 @@
-html{
-    font-size: 16px;
-    background-color: white;
-    background-image: url(https://i.imgur.com/7MswlXJ.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
 
-html, body{
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+#quoteBoxContainer{
     width: 100%;
     height: 100%;
 }
-
-#quoteBoxContainer{
+#container {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
-#text{
+#text {}
 
+#quote-box {
+    height: 18.75rem;
+    width: 38.5rem;
+    border: 1.5px solid #0373fc;
+    border-radius: 10px;
+    padding: 2.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    opacity: 85%;
+    box-shadow: 2px 7px 7px black;
 }
 
+#text-box {
+    height: 50%;
+    padding-left: 0.625rem;
+    font-size: 1.5rem;
+    font-family: 'Cairo', sans-serif;
+    text-align: center;
+}
+
+#author-box {
+    font-size: 1.8rem;
+    display: flex;
+    align-self: flex-end;
+    padding-right: 1.4rem;
+    font-family: 'Zhi Mang Xing';
+}
+
+#button-box {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#new-quote {
+    margin-left: auto;
+    padding-right: 0px;
+    text-align: center;
+    font-size: 1.7rem;
+    width: 70%;
+    height: 3rem;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+}
+
+a:visited{
+    color: blue;
+}
+
+a:hover{
+    color: red;
+}
